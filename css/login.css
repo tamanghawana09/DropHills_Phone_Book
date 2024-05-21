@@ -1,0 +1,56 @@
+@import 'font.css';
+@import 'colors.css';
+@import 'reset.css';
+
+/* login styling */
+body{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Inter';
+    background-image: linear-gradient(to top, #e6b980 0%, #eacda3 100%);
+    flex-wrap: wrap;
+}
+.container{
+    padding: 20px;
+    width: 25vw;
+    height: auto;
+    background-color: white;
+    border: none;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    opacity: 0.8;
+    overflow: hidden;
+    flex-wrap: wrap;
+}
+.container > h2{
+    font-size: 2.5rem;
+}
+.container > form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    gap: 20px;
+    z-index: -1;
+    flex-wrap: wrap;
+}
+.container > form > input{
+    width: 300px;
+    padding: 10px;
+}
+.container > form > .btn{
+    width: 322px;
+    background-color: black;
+    color: var(--primary-color);
+    border: none;
+    padding: 15px;
+    font-size: 1rem;
+}
+.error{
+    color: red;
+}
