@@ -3,7 +3,7 @@ session_start();
 include 'connect.php';
 
 if (!isset($_SESSION['loggedin']) && $_SESSION['loggedin'] != true) {
-    header("Location: login.php");
+    header("Location: /");
     exit();
 }
 
@@ -62,7 +62,6 @@ if (isset($_POST['delete'])) {
                         echo "<td>" . htmlspecialchars($rows['phone_number']) . "</td>";
                         echo "<td>";
                         echo "<form method='POST' action='update.php' style='display: inline;'>";
-                        echo $rows['id'];
                         echo "<input type='hidden' name='id' value='" . $rows['id'] . "'>";
                         echo "<td>" . "<button type='submit' class='btn btn-info' name='update'>Update</button>" . "</td>";
                         echo "</form>";

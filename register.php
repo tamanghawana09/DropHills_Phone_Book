@@ -84,7 +84,7 @@
             <input type="submit" value="Submit" class="btn">
         </form>
         <div class="register-container">
-            Already have an account <a href="login.php">Go back to login.</a>
+            Already have an account <a href="/">Go back to login.</a>
         </div>
     </div>
 </body>

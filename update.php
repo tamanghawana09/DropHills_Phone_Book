@@ -6,7 +6,7 @@ $fname = $lname = $mname = $email = $number = "";
 $fnameErr = $lnameErr = $mnameErr = $emailErr = $numberErr = $passwordErr = "";
 
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
-    header("Location: login.php");
+    header("Location: /");
     exit();
 }
 

@@ -44,7 +44,7 @@ body{
     padding: 10px;
 }
 .container > form > .btn{
-    width: 322px;
+    width: 350px;
     background-color: black;
     color: var(--primary-color);
     border: none;
