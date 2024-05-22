@@ -60,11 +60,11 @@ if (isset($_POST['delete'])) {
                         echo "<td>" . htmlspecialchars($rows['last_name']) . "</td>";
                         echo "<td>" . htmlspecialchars($rows['email']) . "</td>";
                         echo "<td>" . htmlspecialchars($rows['phone_number']) . "</td>";
-
                         echo "<td>";
                         echo "<form method='POST' action='update.php' style='display: inline;'>";
+                        echo $rows['id'];
                         echo "<input type='hidden' name='id' value='" . $rows['id'] . "'>";
-                        echo "<td>" . "<button type='submit' class='btn btn-info'>Update</button>" . "</td>";
+                        echo "<td>" . "<button type='submit' class='btn btn-info' name='update'>Update</button>" . "</td>";
                         echo "</form>";
                         echo "</td>";
                         echo "<td>";

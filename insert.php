@@ -20,11 +20,7 @@
                 $fnameErr = "Only letters and white space allowed";
               }
         }
-       
         $mname = test_input($_POST["mname"]);
-        if (!preg_match("/^[a-zA-Z-' ]*$/",$mname)) {
-            $mnameErr = "Only letters and white space allowed";
-          }
         if(empty($_POST["lname"])){
             $lnameErr = "Last name is required";
         }else{
@@ -62,17 +58,19 @@
         $selectsql = "SELECT phone_number,email from contacts";
         $select_result = $conn->query($selectsql);
         if($select_result->num_rows > 0){
-            $rows = $select_result->fetch_assoc();
-            if($number ==  $rows['phone_number'] && $email == $rows['email']){
-                $numberErr = "Phone number already exists";
-                $emailErr = "Email already exists";
+            while($rows = $select_result->fetch_assoc()){
+                if($rows['phone_number'] == $number){
+                    $numberErr = "Phone number already exists";
+                }
+                if($rows['email'] == $email){
+                    $emailErr = "Email already exists";
+                }
             }
-        }else{
             $insertsql = "INSERT INTO contacts (first_name,middle_name,last_name,email,phone_number) VALUES ('$fname','$mname','$lname','$email','$number')";
-
-            $result = $conn->query($insertsql);
-            if($result === true){
-                header("Location: dashboard.php");
+                $result = $conn->query($insertsql);
+                if($result){
+                    header("Location: dashboard.php");
+                    exit();
             }
         }
     }
