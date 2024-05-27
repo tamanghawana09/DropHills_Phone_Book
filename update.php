@@ -65,37 +65,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_new'])) {
         }
     }
 
+
     if (empty($_POST['number'])) {
         $numberErr = "Phone number is required";
     } else {
         $number = test_input($_POST['number']);
         if (!preg_match("/^[0-9 ]*$/", $number)) {
             $numberErr = "Only numbers allowed";
-        }
-    }
-
-    $selectsql = "SELECT phone_number from contacts";
-    $select_result = $conn->query($selectsql);
-    if ($select_result->num_rows > 0) {
-        while ($rows = $select_result->fetch_assoc()) {
-            if ($rows['phone_number'] == $number) {
-                $numberErr = "Phone number already exists";
+        } else {
+            $selectsql = "SELECT phone_number from contacts";
+            $select_result = $conn->query($selectsql);
+            if ($select_result->num_rows > 0) {
+                while ($rows = $select_result->fetch_assoc()) {
+                    if ($rows['phone_number'] == $number) {
+                        $numberErr = "Phone number already exists";
+                    }
+                }
             }
         }
     }
-
-    $selectsql = "SELECT email from contacts";
-    $select_result = $conn->query($selectsql);
-    if ($select_result->num_rows > 0) {
-        while ($rows = $select_result->fetch_assoc()) {
-            if ($rows['email'] == $email) {
-                $emailErr = "Email already exists";
-            }
-        }
-    }
-
-
-
 
     if (empty($fnameErr) && empty($lnameErr) && empty($mnameErr) && empty($emailErr) && empty($numberErr)) {
         $id = $_POST['update_id'];
@@ -114,7 +102,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_new'])) {
 
 $conn->close();
 
-function test_input($data) {
+function test_input($data)
+{
     $data = trim($data);
     $data = stripslashes($data);
     $data = htmlspecialchars($data);
@@ -124,6 +113,7 @@ function test_input($data) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -134,34 +124,34 @@ function test_input($data) {
 <body style="background-color: #D9CBA4;">
     <div class="card m-2">
         <div class="card-body">
-            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                 <h2>Update the record</h2>
                 <div class="mb-3">
                     <label for="id">Id: "<?php echo isset($rows['id']) ? $rows['id'] : ''; ?>"</label>
                 </div>
                 <div class="mb-3">
                     <label for="first_name" class="form-label">First Name</label>
-                    <span class="error" style="color:red;">* <?php echo $fnameErr;?></span>
-                    <input type="text" class="form-control" name="fname" value="<?php echo htmlspecialchars($fname); ?>"> 
+                    <span class="error" style="color:red;">* <?php echo $fnameErr; ?></span>
+                    <input type="text" class="form-control" name="fname" value="<?php echo htmlspecialchars($fname); ?>">
                 </div>
                 <div class="mb-3">
                     <label for="middle_name" class="form-label">Middle Name</label>
-                    <span class="error" style="color:red;"> <?php echo $mnameErr;?></span>
+                    <span class="error" style="color:red;"> <?php echo $mnameErr; ?></span>
                     <input type="text" class="form-control" name="mname" value="<?php echo htmlspecialchars($mname); ?>">
                 </div>
                 <div class="mb-3">
                     <label for="last_name" class="form-label">Last Name</label>
-                    <span class="error" style="color:red;">* <?php echo $lnameErr;?></span>
+                    <span class="error" style="color:red;">* <?php echo $lnameErr; ?></span>
                     <input type="text" class="form-control" name="lname" value="<?php echo htmlspecialchars($lname); ?>">
                 </div>
                 <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
-                    <span class="error" style="color:red;">* <?php echo $emailErr;?></span>
+                    <span class="error" style="color:red;">* <?php echo $emailErr; ?></span>
                     <input type="email" class="form-control" name="email" value="<?php echo htmlspecialchars($email); ?>">
                 </div>
                 <div class="mb-3">
                     <label for="number" class="form-label">Phone Number</label>
-                    <span class="error" style="color:red;">* <?php echo $numberErr;?></span>
+                    <span class="error" style="color:red;">* <?php echo $numberErr; ?></span>
                     <input type="text" class="form-control" name="number" value="<?php echo htmlspecialchars($number); ?>">
                 </div>
                 <input type="hidden" value="<?php echo isset($rows['id']) ? $rows['id'] : ''; ?>" name="update_id">
@@ -170,4 +160,5 @@ function test_input($data) {
         </div>
     </div>
 </body>
+
 </html>

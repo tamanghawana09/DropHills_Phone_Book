@@ -67,16 +67,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 
-    $selectsql = "SELECT email from contacts";
-    $select_result = $conn->query($selectsql);
-    if ($select_result->num_rows > 0) {
-        while ($rows = $select_result->fetch_assoc()) {
-            if ($rows['email'] == $email) {
-                $emailErr = "Email already exists";
-            }
-        }
-    }
-
     if (empty($emailErr) && empty($numberErr)) {
         $insertsql = "INSERT INTO contacts (first_name,middle_name,last_name,email,phone_number) VALUES ('$fname','$mname','$lname','$email','$number')";
         $result = $conn->query($insertsql);
