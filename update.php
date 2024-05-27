@@ -74,6 +74,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_new'])) {
         }
     }
 
+    $selectsql = "SELECT phone_number from contacts";
+    $select_result = $conn->query($selectsql);
+    if ($select_result->num_rows > 0) {
+        while ($rows = $select_result->fetch_assoc()) {
+            if ($rows['phone_number'] == $number) {
+                $numberErr = "Phone number already exists";
+            }
+        }
+    }
+
+    $selectsql = "SELECT email from contacts";
+    $select_result = $conn->query($selectsql);
+    if ($select_result->num_rows > 0) {
+        while ($rows = $select_result->fetch_assoc()) {
+            if ($rows['email'] == $email) {
+                $emailErr = "Email already exists";
+            }
+        }
+    }
+
+
+
+
     if (empty($fnameErr) && empty($lnameErr) && empty($mnameErr) && empty($emailErr) && empty($numberErr)) {
         $id = $_POST['update_id'];
         $updatesql = "UPDATE contacts SET first_name=?, middle_name=?, last_name=?, email=?, phone_number=? WHERE id=?";

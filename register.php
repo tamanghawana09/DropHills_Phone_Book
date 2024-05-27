@@ -51,7 +51,7 @@
             $sql = "INSERT INTO users(username,email,password,re_password) VALUES ('$username', '$email', '$password', '$repassword')";
            if($conn->query($sql)){
             echo '<script>alert("Successfully Registered")</script>';
-            header("Location: login.php");
+            header("Location: /");
             exit();
            }
         }else{
